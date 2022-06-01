@@ -116,3 +116,20 @@
 #### Preparations for O4
 ##### Scheduled for Dec. 2022
 ##### Higher sensitivity: a lot more GWs
+#
+
+## Physics and Astronomy with Compact Binary Coalescences
+##### Black holes: "densest" objects in the universe, not even light can escape-completely dark
+##### Neutron stars: still unimaginably dense, but not completely dark-extreme matter
+##### Black holes and neutron stars are the byproducts of the end stage of stellar evolution: massive star --> supernova --> neutron star or black hole (stellar graveyard)
+##### WHen two compact objects coalesce, they source loud graviation waves
+###### 3 phases: inspiral, merger, and ringdown
+#### Graviational waves encode source properties
+##### The masses of the two compact objects
+##### The spin of the compact objects
+##### Where and when the mergers occured
+##### How squishy neutron stars are
+#### Learning about the full populaiton of compact objects
+##### A population model describes the distribution of masses, spins, etc. across multiple events
+##### Example: fit a power law to black hole masses
+###### Population parameters: power law slope, minimum and maximum black hole mass
