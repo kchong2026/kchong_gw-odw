@@ -33,3 +33,8 @@
 #
 
 ## Finding Signals in Noise
+##### Use filtering to reduce noise
+###### Highpass filter: "passes" (or keeps) only high frequencies
+###### Lowpass filter: passes only low frequencies
+###### Bandpass filter: keeps signal only in the pass band
+###### Whitening: "Flatten" the data so there is equal noise at all frequencies
