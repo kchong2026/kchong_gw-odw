@@ -2,7 +2,7 @@
 ##### Notes from the videos follow:
 
 ## Time Series Data
-##### Nyguist frequency = fs / 2
+##### Nyquist frequency = fs / 2
 ###### Discretely sampled data with sampling rate fs can represent a continuous signal which only has frequency content below the Nyquist freqency
 ##### Data can only contain frequency content below the Nyquist frequency: higher frequency signals will be lost or "aliased" to lower frequencies
 #
@@ -38,6 +38,3 @@
 ###### Lowpass filter: passes only low frequencies
 ###### Bandpass filter: keeps signal only in the pass band
 ###### Whitening: "Flatten" the data so there is equal noise at all frequencies
-#
-
-# GW Open Data Workshop
