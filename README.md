@@ -41,7 +41,7 @@
 #
 
 # GW Open Data Workshop
-##### Notes from the video follow:
+##### Notes from the videos follow:
 
 ## Gravitational wave detectors
 #### Contributions to sensitivitiy
@@ -214,3 +214,54 @@
 ##### Step 2: multi-banding
 ###### Filter with waveforms split into two frequency bands: low and high
 ###### Reconstruct the real templates after filtering
+#
+
+## Parameter estimation
+##### We estimate parameters to understand physics and perform tests of general relativity
+#### The signal and th enoise
+##### data = signal + noise [d(t) = h(t; theta) + n(t)]
+###### Could also take Fourier Transforms to express the signal in the frequency domain
+#### The signal
+##### Has two polarizations; described by 15 parameters in case of a binary black hole
+###### Intrinsic parameters: masses, spins, etc.
+###### Extrinsic parameters: distance, sky location (RA, Dec), polarization angle, etc.
+##### Higher mass = shorter signal but more amplitude
+##### Higher aligned spin = longer signal
+##### With precession = amplitude variations
+#### The noise
+##### The noise properties are generally unknown and need to be calculated from the data
+##### We make the following assumptions:
+###### Stationary: the noise properties do not change with time
+###### Colored Gaussian: the noise properties are different at each frequency but described by a Gaussian process
+##### Under these assumptions, noise properties are described by the Power Spectral Density (PSD) S_n(f) in the frequency domain
+###### PSD = varaince of noise at each frequency
+##### To estimate the PSD (Welch Method):
+###### Divide the time-series data into small segments
+###### Fourier transform and calcuate |d(f)|^2 for each segment
+###### Calculate the average over all segments
+#### The likelihood
+##### At each frequency, the residual after subtracting the best-fit signal from the data should look like noise, and hence follow a gaussian distribuiton
+###### The likelihood function/distribution can be written as a gaussian distribuiton in the residuals
+#### The prior distribution
+##### A distribution that encodes the prior knowledge/belief in what the parameters of the system ought to be
+##### Examples:
+###### No specific preferred direction in the sky --> uniform in sky area
+###### not much information about the mass distribution --> uniform in masses
+###### Physical limit on the maximum spin on neutron stars --> spin magnitude < 0.89
+#### The evidence
+##### The evidence is used to compare different hypotheses for the data
+##### Example: signal vs. noise
+###### the evidence for noise is just the likelihood with no signal
+###### Bayes factor (or signal vs. noise) is the ratio of evidences
+#### A problem
+##### We have all the tools to calculate the posterior but we have to calculate it over a very high dimensional space (15 parameters) 
+###### Gridding the space and calculating is inefficient so the soluiton is to use stochastic samplers
+##### Stochastic samplers: populate the prior space with random numbers and take steps based whether the move will increase probability (eventually the data should coalesce into a singular or at least smaller area)
+#### Output from a PE Rrun
+##### The output from a PE run is draws/samples from the posterior distribution
+###### Can be thought of as a spreadsheat
+###### Can be read/processed with any standard tools: h5py, numpy, pandas, etc
+###### Make histograms from these samples to get measurement of parameters
+##### The 90% CI (credible interval) is th eregion whose area is 90% of the total area
+##### One could also draw a collection of 2D histograms (corner plots) to look at correlations between parameters
+###### Pro tip: use the PESummary python package for reading in data and produing some nice plots
