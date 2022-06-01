@@ -38,3 +38,6 @@
 ###### Lowpass filter: passes only low frequencies
 ###### Bandpass filter: keeps signal only in the pass band
 ###### Whitening: "Flatten" the data so there is equal noise at all frequencies
+#
+
+# GW Open Data Workshop
