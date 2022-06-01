@@ -135,7 +135,7 @@
 ###### Population parameters: power law slope, minimum and maximum black hole mass
 #
 
-## CBC Searcnes
+## CBC Searches
 #### Compact binary coalescenses
 ##### As objects orbit, they lose energy to GWs: the orbit shrinks and speeds up releasing more energy to GWs
 ##### Frequency and amplitude of GWs increases monotonically
