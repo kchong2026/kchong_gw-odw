@@ -133,3 +133,84 @@
 ##### A population model describes the distribution of masses, spins, etc. across multiple events
 ##### Example: fit a power law to black hole masses
 ###### Population parameters: power law slope, minimum and maximum black hole mass
+#
+
+## CBC Searcnes
+#### Compact binary coalescenses
+##### As objects orbit, they lose energy to GWs: the orbit shrinks and speeds up releasing more energy to GWs
+##### Frequency and amplitude of GWs increases monotonically
+###### Creates a runaway process leading to inspiral and merger
+##### Waveforms model the inspiral, merger, and ringdown of the binary
+##### Intrinsic parameters: masses and spins
+##### Extrinsic parameters: sky position, inclination, time of arrival, phase
+#### Assumptions of the LIGO data
+##### We assume that strain data from the detectors consists of a possible signal and additive noise
+##### We assume that the noise is stationary and Gaussian
+###### Stationary: the noise properties are constant in time
+###### Gaussian: the noise values follow normal distribuitons which we can transform to have 0 mean
+#### Matched filtering as cross correlation
+##### If we know what the signal looks like, we can use matched filtering to find signals in the data
+###### Matched filtering is a correlation of a template waveform with the data
+###### Matched filter output is the signal-to-noise ration SNR time-series
+##### Matched filtering output
+##### Peaks in the SNR time-series are used to identify triggers in the data
+##### Coincident SNR peaks in the data from multiple detectors increases the significance
+#### Modeling the waveforms
+##### Matched filtering releis on knowing the shape of the signal
+###### For CBC waveforms we can model the signals with template waveforms
+##### We construct template banks of waveforms that vary over the instrinsic parameters
+###### 4D template banks - {m1, m2, s1z, s2z}
+#### How many templates do we need?
+##### If the signal perfectly matches the template we have an optimal SNR
+###### Any mismatch causes an SNR loss
+##### Costruct banks with a dense grid of templates such that any signal will be close enough to the nearest template
+###### Can easily create hundreds of thousands of templates (makes a computational burden)
+#### Revisiting our assumptions: in reality, LIGO data is not well modeled
+##### Non-stationary over short and long time scales: we must continuously track the noise properties and update our estimate of the PSD
+###### Short duration non-Gaussian artefacts in the data are glitches (can be a major problem for matched filtering searches)
+##### Non-Gaussian
+###### The only characterization of the LIGO noise is from observations
+##### LIGO noise is colored not white meaning that the power is not distributed evenly across the frequencies
+###### The PSD varies across frequency bins so the data needs to be whitened before filtering
+#### Matched filtering with real search pipelines
+##### Inpractice, real search pipelines must come up with solutions to handle non-ideal noise properties
+##### Filtering millions of templates over months of data is a huge computational burden
+###### To make this feasible, real-search pipelines need to find ways to make the process more efficient
+##### The 3 CBC searches: GstLAL, MBTA, and PyCBC each use slighltly different  methods
+#### GstLAL: non-Gaussian data
+##### Solution 1: gating
+###### Remove stretches of data with large non-Gaussian features before matched filtering
+###### We have to be careful to not accidently gate a real signal
+##### Solution 2: signal consistency tests
+###### Matched filtering doesn't produce just a SNR peak but a time-series of SNR data
+###### Compare the SNR time series shape ot the predicted shape for a template waveform
+##### Solution 3: iDQ (integrated data quality)
+###### Use machine learning and data from auxillary channels to identify glitches
+###### Clean data: boost significance of candidates
+###### Glitchy data: reduce significance of candidates
+#### GstLAL: LLOID method (Low latency online inspiral detection)
+##### Reduce computational burden
+##### Improve efficiency and lower the latency of the search
+##### Step 1: time slicing and down sampling
+###### Take advantage of monotonic increase in signal frequency
+###### Use lower sampling rate at earlier parts of the signal to avoid oversampling
+###### We can slice waveforms into freqncy bands then downsample each one to save computations
+##### Step 2: singular value decomposition (SVD)
+###### Our template banks are highly redundant
+###### Transform to a reduced set of basis waveforms
+###### Filter with the vasis waveforms then reconstruct the physical templates after filtering
+#### Matched filtering with MBTA and PyCBC
+##### PyCBC and MBTA both regularly perform matched filtering in the frequency domain
+##### Perform FFT on blocks of data, then correlate the data witht he template waveforms
+###### Typical block length = 2048 seconds
+#### Matched filtering with BMTA and PyCBC: non-Gaussian data
+##### MBTA and PyCBC both use gating and signal consistency tests similar to GstLAL
+###### They do not use iDQ but rather vetoes to reject triggers from times identified to have poor data quality
+##### MBTA: re-filter high mass templates
+###### Heavy BBH systems can be mistake for glitches due to their short duration
+###### MBTA re-filters templates with durations of <3 sec without gating first
+###### This helps to avoid accidently gating real signals
+#### Matched filtering with MBTA
+##### Step 2: multi-banding
+###### Filter with waveforms split into two frequency bands: low and high
+###### Reconstruct the real templates after filtering
